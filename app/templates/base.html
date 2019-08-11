@@ -9,7 +9,7 @@
 <body>
       <div> 
         <a href="{{ url_for('index') }}">Home</a>
-        {# <a href="{{ url_for('hello') }}">Main Page</a> #}
+        <a href="{{ url_for('add_teacher') }}">Add Teacher</a>
         {# Checking if not logged in #}
         {% if current_user.is_anonymous %}
           <a href="{{url_for('register') }}">Register</a>
