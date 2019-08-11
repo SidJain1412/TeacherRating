@@ -1,5 +1,5 @@
 from app import app, db
-# from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm
 from flask import render_template, redirect, flash, make_response, jsonify, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, login_user, logout_user, login_required
@@ -62,3 +62,10 @@ def register():
         return redirect(url_for('login'))
     # Title is going to base.html through register.html
     return render_template('register.html', title="Register", form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash("Logged out Successfully.")
+    return redirect(url_for('login'))
