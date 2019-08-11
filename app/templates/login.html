@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Sign In</h1>
+	{# Specifying not to validate the form, we will do that using WTForms (not necessary to include this)#}
+	<form action = "" method = "post" novalidate>
+		{# Hidden tag generates a hidden field with a token to protect against CSRF attacks #}
+		{{ form.hidden_tag() }}
+		<p>
+			{# form.field_name.label for Field label #}
+			{{ form.email.label }}<br>
+			{# form.field_name() for Field #}
+			{# HTML attributes can be passed as arguments #}
+			{{ form.email(size = 32)}}<br>
+			{# To show error messages instead of just redisplaying the form #}
+			{% for error in form.email.errors %}
+				<span style="color: red;">[{{error}}]</span>
+			{% endfor %}			
+		</p>
+		<p>
+			{{ form.password.label }}<br>
+			{{ form.password(size = 32)}}<br>
+			{% for error in form.password.errors %}
+				<span style="color: red;">[{{error}}]</span>
+			{% endfor %}
+		</p>
+		<p>{{ form.remember_me() }} {{form.remember_me.label}}</p>
+		<p>{{ form.submit() }}</p>
+	</form>
+	<p>New User? <a href="{{url_for('register')}}">Click to Register!</a></p>
+{% endblock %}
