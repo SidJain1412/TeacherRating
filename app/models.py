@@ -31,7 +31,8 @@ class User(UserMixin, db.Model):
 
 class Teacher(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), index=True, unique=True)
+    first_name = db.Column(db.String(64), index=True)
+    last_name = db.Column(db.String(64), index=True)
     dept = db.Column(db.String(64), index=True)
     overall_score = db.Column(db.Float, default=0.0)
     dedication_score = db.Column(db.Float, default=0.0)
