@@ -1,5 +1,5 @@
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, AddTeacherForm
 from flask import render_template, redirect, flash, make_response, jsonify, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, login_user, logout_user, login_required
@@ -46,6 +46,26 @@ def login():
             next_page = url_for('index')
         return redirect(next_page)
     return render_template('login.html', title="Sign In", form=form)
+
+
+@app.route('/add_teacher', methods=['GET', 'POST'])
+@login_required
+def add_teacher():
+    form = AddTeacherForm()
+
+    if form.validate_on_submit():
+        teacher = Teacher.query.filter_by(
+            first_name=form.first_name.data, last_name=form.last_name.data, dept=form.dept.data).first()
+        if teacher is not None:
+            flash('Teacher already exists')
+            return redirect(url_for('add_teacher'))
+        teacher = Teacher(first_name=form.first_name.data,
+                          last_name=form.last_name.data, dept=form.dept.data)
+        db.session.add(teacher)
+        db.session.commit()
+        flash("Successfully Added New Teacher!")
+        return redirect(url_for('add_teacher'))
+    return render_template('add_teacher.html', title='Add Teacher', form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
