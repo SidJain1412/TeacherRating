@@ -3,7 +3,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
-from app.models import User
+from app.models import User, Teacher
 
 
 class LoginForm(FlaskForm):
@@ -33,3 +33,11 @@ class RegistrationForm(FlaskForm):
         domain = email.data.split('@')[1]
         if(domain != 'srmuniv.edu.in'):
             raise ValidationError('Please enter an SRM email ID')
+
+
+class AddTeacherForm(FlaskForm):
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    dept = SelectField('Department', choices=[(
+        'cse', 'CSE'), ('it', 'IT'), ('swe', 'Software')], validators=[DataRequired()])
+    submit = SubmitField('Add Teacher')
