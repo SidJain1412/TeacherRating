@@ -17,6 +17,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     dept = db.Column(db.String(64), index=True)
     password_hash = db.Column(db.String(128))
+    access = db.Column(db.Boolean, default=0)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
