@@ -25,7 +25,11 @@ class RegistrationForm(FlaskForm):
                               DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
+    # validate_{field_name} makes a custom validator automatically used for that field
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('E-mail is already in use. Try again.')
+        domain = email.data.split('@')[1]
+        if(domain != 'srmuniv.edu.in'):
+            raise ValidationError('Please enter an SRM email ID')
