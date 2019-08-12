@@ -12,8 +12,12 @@ function outputUpdate(val) {
 		{{ form.hidden_tag() }}
 		<p>
 			{{ form.dedication_score.label }}<br>
-			{{ form.dedication_score(min=1, max=5, size=32, oninput="outputUpdate(value)")}}
-			<output for="dedication_score" id="selected-score">{{form.dedication_score.data}}</output><br>
+			{% for score in form.dedication_score %}
+				{{ score.label }} {{score}}
+			{% endfor %}
+			{# {{ form.dedication_score }}<br> #}
+			{# {{ form.dedication_score(min=1, max=5, size=32, oninput="outputUpdate(value)")}}
+			<output for="dedication_score" id="selected-score">{{form.dedication_score.data}}</output><br> #}
 			{% for error in form.dedication_score.errors %}
 				<span style="color:red;">[{{error}}]</span>
 			{% endfor %}

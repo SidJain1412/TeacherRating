@@ -1,7 +1,7 @@
 # Using Flask WTF (WT Forms) to represent web forms
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DecimalField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DecimalField, RadioField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User, Teacher
 
@@ -44,4 +44,6 @@ class AddTeacherForm(FlaskForm):
 
 
 class RateTeacherForm(FlaskForm):
-    dedication_score = DecimalField('Dedication', validators=[DataRequired()])
+    dedication_score = RadioField('Dedication', choices=[(
+        '1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], validators=[DataRequired()])
+
