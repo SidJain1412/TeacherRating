@@ -42,4 +42,4 @@ class Teacher(db.Model):
     friendliness_score = db.Column(db.Float, default=0.0)
 
     def __repr__(self):
-        return '<Teacher {}>'.format(self.name)
+        return '<Teacher {}>'.format(self.first_name + self.last_name)
