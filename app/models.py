@@ -47,4 +47,15 @@ class Teacher(db.Model):
         return '<Teacher {}>'.format(self.first_name + self.last_name)
 
 
-# class Ratings(db.Model):
+class Rating(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    teacher_id = db.Column(db.Integer, db.ForeignKey('teacher.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('teacher.id'))
+    dedication_score = db.Column(db.Integer)
+    leniency_score = db.Column(db.Integer)
+    marks_score = db.Column(db.Integer)
+    teaching_score = db.Column(db.Integer)
+    friendliness_score = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Rating {}>'.format(self.teacher_id + ": " + self.user_id)

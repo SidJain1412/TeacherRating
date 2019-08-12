@@ -3,9 +3,10 @@ from app.forms import LoginForm, RegistrationForm, AddTeacherForm, RateTeacherFo
 from flask import render_template, redirect, flash, make_response, jsonify, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Teacher
+from app.models import User, Teacher, Rating
 from werkzeug.urls import url_parse
 from datetime import datetime
+from .views import update_score
 
 
 auth = HTTPBasicAuth()
@@ -94,10 +95,22 @@ def view_teachers():
     return redirect(url_for('add_teacher'))
 
 
-@app.route('/rate_teacher/<teacherId>')
+@app.route('/rate_teacher/<teacherId>', methods=['GET', 'POST'])
 @login_required
 def rate_teacher(teacherId):
     form = RateTeacherForm()
+    if form.validate_on_submit():
+        rating = Rating(teacher_id=teacherId, user_id=current_user.id,
+                        dedication_score=form.dedication_score.data,
+                        leniency_score=form.leniency_score.data,
+                        marks_score=form.marks_score.data,
+                        teaching_score=form.teaching_score.data,
+                        friendliness_score=form.friendliness_score.data)
+        db.session.add(rating)
+        db.session.commit()
+        flash('Successfuly rated! Thank you for your contribution.')
+        return redirect(url_for('view_teachers'))
+
     teacher = Teacher.query.filter_by(id=teacherId).first()
     print(teacher)
     return render_template('rate_teacher.html', title="Rate Teacher", teacher=teacher, form=form)
