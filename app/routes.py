@@ -90,7 +90,8 @@ def view_teachers():
     teachers = Teacher.query.order_by(Teacher.created_at.desc()).all()
     if(len(teachers)):
         return render_template('view_teachers.html', title="Teachers", teachers=teachers)
-    return jsonify({'error': 'No Teachers Added'})
+    flash('No teachers added. Please add some.')
+    return redirect(url_for('add_teacher'))
 
 
 @app.route('/rate_teacher/<teacherId>')

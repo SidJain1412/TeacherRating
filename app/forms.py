@@ -46,4 +46,12 @@ class AddTeacherForm(FlaskForm):
 class RateTeacherForm(FlaskForm):
     dedication_score = RadioField('Dedication', choices=[(
         '1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], validators=[DataRequired()])
-
+    leniency_score = RadioField('Leniency', choices=[(
+        '1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], validators=[DataRequired()])
+    marks_score = RadioField('Marking', choices=[(
+        '1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], validators=[DataRequired()])
+    teaching_score = RadioField('Teaching', choices=[(
+        '1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], validators=[DataRequired()])
+    friendliness_score = RadioField('Friendliness', choices=[(
+        '1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], validators=[DataRequired()])
+    submit = SubmitField('Submit Rating')

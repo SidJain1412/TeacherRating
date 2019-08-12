@@ -11,32 +11,51 @@ function outputUpdate(val) {
 	<form action="" method="post">
 		{{ form.hidden_tag() }}
 		<p>
-			{{ form.dedication_score.label }}<br>
+			{{ form.dedication_score.label }}:
 			{% for score in form.dedication_score %}
 				{{ score.label }} {{score}}
 			{% endfor %}
-			{# {{ form.dedication_score }}<br> #}
-			{# {{ form.dedication_score(min=1, max=5, size=32, oninput="outputUpdate(value)")}}
-			<output for="dedication_score" id="selected-score">{{form.dedication_score.data}}</output><br> #}
 			{% for error in form.dedication_score.errors %}
 				<span style="color:red;">[{{error}}]</span>
 			{% endfor %}
 		</p>
-		{# <p>
-			{{ form.last_name.label }}<br>
-			{{ form.last_name(size=32) }}<br>
-			{% for error in form.last_name.errors %}
+		<p>
+			{{ form.leniency_score.label }}:
+			{% for score in form.leniency_score %}
+				{{ score.label }} {{score}}
+			{% endfor %}
+			{% for error in form.leniency_score.errors %}
 				<span style="color:red;">[{{error}}]</span>
 			{% endfor %}
 		</p>
 		<p>
-			{{ form.dept.label }}<br>
-			{{ form.dept() }}<br>
-			{% for error in form.dept.errors %}
+			{{ form.marks_score.label }}:
+			{% for score in form.marks_score %}
+				{{ score.label }} {{score}}
+			{% endfor %}
+			{% for error in form.marks_score.errors %}
 				<span style="color:red;">[{{error}}]</span>
 			{% endfor %}
-		</p> #}
-        {# <p>{{ form.submit() }}</p> #}
+		</p>
+		<p>
+			{{ form.teaching_score.label }}:
+			{% for score in form.teaching_score %}
+				{{ score.label }} {{score}}
+			{% endfor %}
+			{% for error in form.teaching_score.errors %}
+				<span style="color:red;">[{{error}}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.friendliness_score.label }}:
+			{% for score in form.friendliness_score %}
+				{{ score.label }} {{score}}
+			{% endfor %}
+			{% for error in form.friendliness_score.errors %}
+				<span style="color:red;">[{{error}}]</span>
+			{% endfor %}
+		</p>
+        <p>{{ form.submit() }}</p>
     </form>
 
 {% endblock %}
