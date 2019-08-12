@@ -40,6 +40,7 @@ class Teacher(db.Model):
     marks_score = db.Column(db.Float, default=0.0)
     teaching_score = db.Column(db.Float, default=0.0)
     friendliness_score = db.Column(db.Float, default=0.0)
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
         return '<Teacher {}>'.format(self.first_name + self.last_name)

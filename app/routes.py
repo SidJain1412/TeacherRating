@@ -87,7 +87,7 @@ def register():
 @app.route('/view_teachers')
 @login_required
 def view_teachers():
-    teachers = Teacher.query.all()
+    teachers = Teacher.query.order_by(Teacher.created_at.desc()).all()
     if(len(teachers)):
         return render_template('view_teachers.html', title="Teachers", teachers=teachers)
     return jsonify({'error': 'No Teachers Added'})
