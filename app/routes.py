@@ -100,19 +100,28 @@ def view_teachers():
 def rate_teacher(teacherId):
     form = RateTeacherForm()
     if form.validate_on_submit():
+        dedication_score = form.dedication_score.data
+        leniency_score = form.leniency_score.data
+        marks_score = form.marks_score.data
+        teaching_score = form.teaching_score.data
+        friendliness_score = form.friendliness_score.data
         rating = Rating(teacher_id=teacherId, user_id=current_user.id,
-                        dedication_score=form.dedication_score.data,
-                        leniency_score=form.leniency_score.data,
-                        marks_score=form.marks_score.data,
-                        teaching_score=form.teaching_score.data,
-                        friendliness_score=form.friendliness_score.data)
-        db.session.add(rating)
-        db.session.commit()
-        flash('Successfuly rated! Thank you for your contribution.')
-        return redirect(url_for('view_teachers'))
+                        dedication_score=dedication_score,
+                        leniency_score=leniency_score,
+                        marks_score=marks_score,
+                        teaching_score=teaching_score,
+                        friendliness_score=friendliness_score)
 
+        if(update_score(teacherId, dedication_score, leniency_score, marks_score, teaching_score, friendliness_score)):
+            db.session.add(rating)
+            db.session.commit()
+            flash('Successfuly rated! Thank you for your contribution.')
+            return redirect(url_for('view_teachers'))
+        else:
+            flash(
+                'Unknown error. Sorry, please report the issue to the admin. Try again.')
+            return redirect(url_for(rate_teacher, teacherId=teacherId))
     teacher = Teacher.query.filter_by(id=teacherId).first()
-    print(teacher)
     return render_template('rate_teacher.html', title="Rate Teacher", teacher=teacher, form=form)
 
 
