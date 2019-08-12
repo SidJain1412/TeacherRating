@@ -13,14 +13,14 @@
 </head>
 <body>
       <div> 
-        <a class="btn btn-info" href="{{ url_for('index') }}">Home</a>
-        <a class="btn btn-info" href="{{ url_for('add_teacher') }}">Add Teacher</a>
-        <a class="btn btn-info" href="{{ url_for('view_teachers') }}">View Teachers</a>
+        <a class="btn btn-info" href="{{ url_for('index') }}">Home</a>        
         {# Checking if not logged in #}
         {% if current_user.is_anonymous %}
           <a class="btn btn-info" href="{{url_for('register') }}">Register</a>
           <a class="btn btn-info" href="{{ url_for('login') }}">Login</a>
         {% else %}
+          <a class="btn btn-info" href="{{ url_for('add_teacher') }}">Add Teacher</a>
+          <a class="btn btn-info" href="{{ url_for('view_teachers') }}">View Teachers</a>
           <a class="btn btn-info" href="{{ url_for('logout') }}">Logout</a>
         {% endif %}
       </div>

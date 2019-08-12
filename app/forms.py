@@ -1,7 +1,7 @@
 # Using Flask WTF (WT Forms) to represent web forms
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DecimalField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User, Teacher
 
@@ -18,7 +18,7 @@ class RegistrationForm(FlaskForm):
     # Automatic resolving of email
     email = StringField('Email', validators=[DataRequired(), Email()])
     dept = SelectField('Department', choices=[(
-        'cse', 'CSE'), ('it', 'IT'), ('swe', 'Software')], validators=[DataRequired()])
+        'CSE', 'CSE'), ('IT', 'IT'), ('Software', 'Software')], validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     # Check if both passwords are the same
     password2 = PasswordField('Repeat Password', validators=[
@@ -39,5 +39,9 @@ class AddTeacherForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
     dept = SelectField('Department', choices=[(
-        'cse', 'CSE'), ('it', 'IT'), ('swe', 'Software')], validators=[DataRequired()])
+        'CSE', 'CSE'), ('IT', 'IT'), ('Software', 'Software')], validators=[DataRequired()])
     submit = SubmitField('Add Teacher')
+
+
+class RateTeacherForm(FlaskForm):
+    dedication_score = DecimalField('Dedication', validators=[DataRequired()])

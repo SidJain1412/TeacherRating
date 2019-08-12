@@ -16,12 +16,13 @@
 	            <th>Marks Score</th>
 	            <th>Teaching Score</th>
 	            <th>Friendliness Score</th>
+	            <th>Rate</th>
 	        </tr>
 	    </thead>
 	    <tbody>
 		{% for teacher in teachers %}
 			<tr>
-	            <td>{{teacher.first_name}} {{teacher.last_name}}</td>
+	            <td style = "background:#007B35;">{{teacher.first_name}} {{teacher.last_name}}</td>
 	            <td>{{teacher.dept}}</td>
 	            <td>{{teacher.overall_score}}</td>
 	            <td>{{teacher.dedication_score}}</td>
@@ -29,6 +30,7 @@
 	            <td>{{teacher.marks_score}}</td>
 	            <td>{{teacher.teaching_score}}</td>
 	            <td>{{teacher.friendliness_score}}</td>
+	            <td><a href="{{ url_for('rate_teacher', teacherId=teacher.id)}}">Rate</a>
 	        </tr><br>
 		{% endfor %}
 		</tbody>

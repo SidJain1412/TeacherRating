@@ -1,5 +1,5 @@
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, AddTeacherForm
+from app.forms import LoginForm, RegistrationForm, AddTeacherForm, RateTeacherForm
 from flask import render_template, redirect, flash, make_response, jsonify, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, login_user, logout_user, login_required
@@ -91,6 +91,15 @@ def view_teachers():
     if(len(teachers)):
         return render_template('view_teachers.html', title="Teachers", teachers=teachers)
     return jsonify({'error': 'No Teachers Added'})
+
+
+@app.route('/rate_teacher/<teacherId>')
+@login_required
+def rate_teacher(teacherId):
+    form = RateTeacherForm()
+    teacher = Teacher.query.filter_by(id=teacherId).first()
+    print(teacher)
+    return render_template('rate_teacher.html', title="Rate Teacher", teacher=teacher, form=form)
 
 
 @app.route('/logout')
