@@ -1,8 +1,8 @@
-"""Initializing user and teacher tables
+"""Teacher timestamp, user access control etc. added
 
-Revision ID: d8ab78eead6a
+Revision ID: 761a2f6fd323
 Revises: 
-Create Date: 2019-08-12 03:50:37.632511
+Create Date: 2019-08-12 14:52:02.378131
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd8ab78eead6a'
+revision = '761a2f6fd323'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -29,8 +29,10 @@ def upgrade():
     sa.Column('marks_score', sa.Float(), nullable=True),
     sa.Column('teaching_score', sa.Float(), nullable=True),
     sa.Column('friendliness_score', sa.Float(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_index(op.f('ix_teacher_created_at'), 'teacher', ['created_at'], unique=False)
     op.create_index(op.f('ix_teacher_dept'), 'teacher', ['dept'], unique=False)
     op.create_index(op.f('ix_teacher_first_name'), 'teacher', ['first_name'], unique=False)
     op.create_index(op.f('ix_teacher_last_name'), 'teacher', ['last_name'], unique=False)
@@ -58,5 +60,6 @@ def downgrade():
     op.drop_index(op.f('ix_teacher_last_name'), table_name='teacher')
     op.drop_index(op.f('ix_teacher_first_name'), table_name='teacher')
     op.drop_index(op.f('ix_teacher_dept'), table_name='teacher')
+    op.drop_index(op.f('ix_teacher_created_at'), table_name='teacher')
     op.drop_table('teacher')
     # ### end Alembic commands ###
