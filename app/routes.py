@@ -84,6 +84,15 @@ def register():
     return render_template('register.html', title="Register", form=form)
 
 
+@app.route('/view_teachers')
+@login_required
+def view_teachers():
+    teachers = Teacher.query.all()
+    if(len(teachers)):
+        return render_template('view_teachers.html', title="Teachers", teachers=teachers)
+    return jsonify({'error': 'No Teachers Added'})
+
+
 @app.route('/logout')
 def logout():
     logout_user()
