@@ -41,6 +41,10 @@ class Teacher(db.Model):
     teaching_score = db.Column(db.Float, default=0.0)
     friendliness_score = db.Column(db.Float, default=0.0)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    created_by = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Teacher {}>'.format(self.first_name + self.last_name)
+
+
+# class Ratings(db.Model):

@@ -60,7 +60,7 @@ def add_teacher():
             flash('Teacher already exists')
             return redirect(url_for('add_teacher'))
         teacher = Teacher(first_name=form.first_name.data,
-                          last_name=form.last_name.data, dept=form.dept.data)
+                          last_name=form.last_name.data, dept=form.dept.data, created_by=current_user.id)
         db.session.add(teacher)
         db.session.commit()
         flash("Successfully Added New Teacher!")
