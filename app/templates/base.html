@@ -1,5 +1,10 @@
 <html>
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="static/css/styles.css">
   {% if title %}
       <title>{{ title }} - Teacher Rating</title>
   {% else %}
@@ -8,14 +13,15 @@
 </head>
 <body>
       <div> 
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('add_teacher') }}">Add Teacher</a>
+        <a class="btn btn-info" href="{{ url_for('index') }}">Home</a>
+        <a class="btn btn-info" href="{{ url_for('add_teacher') }}">Add Teacher</a>
+        <a class="btn btn-info" href="{{ url_for('view_teachers') }}">View Teachers</a>
         {# Checking if not logged in #}
         {% if current_user.is_anonymous %}
-          <a href="{{url_for('register') }}">Register</a>
-          <a href="{{ url_for('login') }}">Login</a>
+          <a class="btn btn-info" href="{{url_for('register') }}">Register</a>
+          <a class="btn btn-info" href="{{ url_for('login') }}">Login</a>
         {% else %}
-          <a href="{{ url_for('logout') }}">Logout</a>
+          <a class="btn btn-info" href="{{ url_for('logout') }}">Logout</a>
         {% endif %}
       </div>
       <hr>

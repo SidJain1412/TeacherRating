@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% if teachers.error %}
+		<h1>No teachers currently. Please add some.</h1>
+	{% else %}
+	<h1>All teachers are listed below</h1>
+	<table class="table table-striped table-bordered table-hover table-dark col-md-6 table-condensed">
+		<thead>
+	        <tr>
+	            <th>Name</th>
+	            <th>Department</th>
+	            <th>Overall Score</th>
+	            <th>Dedication Score</th>
+	            <th>Leniency Score</th>
+	            <th>Marks Score</th>
+	            <th>Teaching Score</th>
+	            <th>Friendliness Score</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+		{% for teacher in teachers %}
+			<tr>
+	            <td>{{teacher.first_name}} {{teacher.last_name}}</td>
+	            <td>{{teacher.dept}}</td>
+	            <td>{{teacher.overall_score}}</td>
+	            <td>{{teacher.dedication_score}}</td>
+	            <td>{{teacher.leniency_score}}</td>
+	            <td>{{teacher.marks_score}}</td>
+	            <td>{{teacher.teaching_score}}</td>
+	            <td>{{teacher.friendliness_score}}</td>
+	        </tr><br>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% endif %}
+
+{% endblock %}
