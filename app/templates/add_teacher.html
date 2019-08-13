@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Add Teacher</h2>
+<div class="jumbotron">
+	<h2>Add Teacher</h2>
+</div>
+<div class="container">
 	<form action="" method="post">
 		{{ form.hidden_tag() }}
 		<p>
@@ -27,5 +30,6 @@
 		</p>
         <p>{{ form.submit() }}</p>
     </form>
+</div>
 
 {% endblock %}

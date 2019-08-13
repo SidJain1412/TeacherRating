@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 	{% if teachers.error %}
 		<h1>No teachers currently. Please add some.</h1>
 	{% else %}
+<div class="container" style="padding:20px; background-color:#F2F2F2">
 	<h2>All teachers are listed below</h2>
+</div>
+<div class="container">
 	<table class="table table-striped table-bordered table-hover table-dark col-md-6 table-condensed">
 		<thead>
 	        <tr>
@@ -22,7 +26,7 @@
 	    <tbody>
 		{% for teacher in teachers %}
 			<tr>
-	            <td style = "background:#95ECBA; color: black;"><b>{{teacher.first_name}} {{teacher.last_name}}</b></td>
+	            <td style = "background:#95ECBA; color: black;"><a class="btn btn-primary" href="{{ url_for('teacher', teacherId=teacher.id)}}"><b>{{teacher.first_name}} {{teacher.last_name}}</b></a></td>
 	            <td>{{teacher.dept}}</td>
 	            <td class="badge badge-success">{{teacher.overall_score}}</td>
 	            <td>{{teacher.dedication_score}}</td>
@@ -30,11 +34,12 @@
 	            <td>{{teacher.marks_score}}</td>
 	            <td>{{teacher.teaching_score}}</td>
 	            <td>{{teacher.friendliness_score}}</td>
-	            <td><a class="btn btn-primary" href="{{ url_for('rate_teacher', teacherId=teacher.id)}}">Rate</a>
+	            <td><a class="btn btn-primary" href="{{ url_for('rate_teacher', teacherId=teacher.id)}}">Rate</a></td>
 	        </tr><br>
 		{% endfor %}
 		</tbody>
 	</table>
 	{% endif %}
+</div>
 
 {% endblock %}

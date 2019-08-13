@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="jumbotron">
 	<h1>Sign In</h1>
+</div>
+<div class="container">
 	{# Specifying not to validate the form, we will do that using WTForms (not necessary to include this)#}
 	<form action = "" method = "post" novalidate>
 		{# Hidden tag generates a hidden field with a token to protect against CSRF attacks #}
@@ -28,4 +31,5 @@
 		<p>{{ form.submit() }}</p>
 	</form>
 	<p>New User? <a href="{{url_for('register')}}">Click to Register!</a></p>
+</div>
 {% endblock %}
