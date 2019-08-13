@@ -16,7 +16,7 @@
 	            <th>Marks Score</th>
 	            <th>Teaching Score</th>
 	            <th>Friendliness Score</th>
-	            <th>Rate</th>
+	            <th></th>
 	        </tr>
 	    </thead>
 	    <tbody>
@@ -30,7 +30,7 @@
 	            <td>{{teacher.marks_score}}</td>
 	            <td>{{teacher.teaching_score}}</td>
 	            <td>{{teacher.friendliness_score}}</td>
-	            <td><a href="{{ url_for('rate_teacher', teacherId=teacher.id)}}">Rate</a>
+	            <td><a class="btn btn-primary" href="{{ url_for('rate_teacher', teacherId=teacher.id)}}">Rate</a>
 	        </tr><br>
 		{% endfor %}
 		</tbody>
