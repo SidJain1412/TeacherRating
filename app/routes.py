@@ -98,6 +98,11 @@ def view_teachers():
 @app.route('/rate_teacher/<teacherId>', methods=['GET', 'POST'])
 @login_required
 def rate_teacher(teacherId):
+    user_id = current_user.id
+    rating = Rating.query.filter_by(user_id=user_id, teacher_id=teacherId).first()
+    if rating is not None:
+        flash('You have already rated this teacher!')
+        return redirect(url_for('view_teachers'))
     form = RateTeacherForm()
     if form.validate_on_submit():
         dedication_score = form.dedication_score.data
