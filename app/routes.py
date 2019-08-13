@@ -88,7 +88,7 @@ def register():
 @app.route('/view_teachers')
 @login_required
 def view_teachers():
-    teachers = Teacher.query.order_by(Teacher.created_at.desc()).all()
+    teachers = Teacher.query.order_by(Teacher.overall_score.desc()).all()
     if(len(teachers)):
         return render_template('view_teachers.html', title="Teachers", teachers=teachers)
     flash('No teachers added. Please add some.')
