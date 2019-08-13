@@ -135,3 +135,13 @@ def logout():
     logout_user()
     flash("Logged out Successfully.")
     return redirect(url_for('login'))
+
+
+@app.route('/teacher/<teacherId>')
+@login_required
+def teacher(teacherId):
+    teacher = Teacher.query.filter_by(id=teacherId).first()
+    if teacher is not None:
+        return render_template('teacher.html', teacher=teacher)
+    flash('Invalid Teacher ID')
+    return render_template(url_for('view_teachers'))

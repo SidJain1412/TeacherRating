@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-4">{{ teacher.first_name }} {{ teacher.last_name }}  <span class="badge badge-success">{{ teacher.overall_score }}</span></h1>
+	</div>
+</div>
+	<div class="container text-center col-md-6">
+		<div>
+			<h4>Dedication: <span class="badge badge-success">{{ teacher.dedication_score }}</span></h4>
+		</div>
+		<div>
+			<h4>Leniency: <span class="badge badge-success">{{ teacher.leniency_score }}</span></h4>
+		</div>
+		<div>
+			<h4>Marks: <span class="badge badge-success">{{ teacher.marks_score }}</span></h4>
+		</div>
+		<div>
+			<h4>Teaching: <span class="badge badge-success">{{ teacher.teaching_score }}</span></h4>
+		</div>
+		<div>
+			<h4>Friendliness: <span class="badge badge-success">{{ teacher.friendliness_score }}</span></h4>
+		</div>
+	</div>
+
+{% endblock %}
