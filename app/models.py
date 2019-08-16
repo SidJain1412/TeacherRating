@@ -59,3 +59,14 @@ class Rating(db.Model):
 
     def __repr__(self):
         return '<Rating {}>'.format(self.teacher_id + ": " + self.user_id)
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    teacher_id = db.Column(db.Integer, db.ForeignKey('teacher.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('teacher.id'))
+    value = db.String(140)
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Comment {}>'.format(self.user_id + ": " + self.value)
