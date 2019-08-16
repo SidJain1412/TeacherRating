@@ -144,19 +144,25 @@ def teacher(teacherId):
     teacher = Teacher.query.filter_by(id=teacherId).first()
 
     if teacher is not None:
+        # Checking if user has previously commented on this teacher.
+        prevcomment = Comment.query.filter_by(user_id=current_user.id, teacher_id=teacherId).first()
+        print(prevcomment)
+        if prevcomment is None:
+            form = CommentForm()
+            if form.validate_on_submit():
+                comment = Comment(teacher_id=teacherId,
+                                  user_id=current_user.id, value=form.comment.data)
+                db.session.add(comment)
+                db.session.commit()
+                flash('Successfully added comment!')
+                comments = Comment.query.filter_by(teacher_id=teacherId).all()
+                return redirect(url_for('teacher', teacherId=teacherId))
+                # return render_template('teacher.html', teacher=teacher, comments=comments)
+
+            comments = Comment.query.filter_by(teacher_id=teacherId).all()
+            return render_template('teacher.html', teacher=teacher, form=form, comments=comments)
         comments = Comment.query.filter_by(teacher_id=teacherId).all()
-        print(len(comments))
-        print('fetched comments')
-        print(comments)
-        form = CommentForm()
-        if form.validate_on_submit():
-            comment = Comment(teacher_id=teacherId,
-                              user_id=current_user.id, value=form.comment.data)
-            print(form)
-            db.session.add(comment)
-            db.session.commit()
-            flash('Successfully added comment!')
-        return render_template('teacher.html', teacher=teacher, form=form, comments=comments)
+        return render_template('teacher.html', teacher=teacher, comments=comments)
     flash('Invalid Teacher ID')
 
     return render_template(url_for('view_teachers'))
