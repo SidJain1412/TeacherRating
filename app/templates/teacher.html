@@ -23,13 +23,18 @@
 			<h4>Friendliness: <span class="badge badge-success">{{ teacher.friendliness_score }}</span></h4>
 		</div>
 		<form action="" method="post">
-		{{ form.hidden_tag() }}
-		<p>
-			{{ form.comment.label }}<br>
-			{{ form.comment(size=32) }}
-		</p>
-		<p>{{ form.submit() }}</p>
-	</form>
+			{{ form.hidden_tag() }}
+			<p>
+				{{ form.comment.label }}<br>
+				{{ form.comment(size=32) }}
+			</p>
+			<p>{{ form.submit() }}</p>
+		</form>
+		<div>
+			{% for comment in comments %}
+				<p>{{comment.user_id}}: {{comment.value}}</p>
+			{% endfor %}
+		</div>
 
 	</div>
 	
