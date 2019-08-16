@@ -1,7 +1,7 @@
 # Using Flask WTF (WT Forms) to represent web forms
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DecimalField, RadioField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DecimalField, RadioField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User, Teacher
 
@@ -55,3 +55,8 @@ class RateTeacherForm(FlaskForm):
     friendliness_score = RadioField('Friendliness', choices=[(
         '1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], validators=[DataRequired()])
     submit = SubmitField('Submit Rating')
+
+
+class CommentForm(FlaskForm):
+    comment = TextAreaField('Comment', validators=[Length(min=0, max=140)])
+    submit = SubmitField('Post Comment')

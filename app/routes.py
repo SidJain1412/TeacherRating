@@ -1,9 +1,9 @@
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, AddTeacherForm, RateTeacherForm
+from app.forms import LoginForm, RegistrationForm, AddTeacherForm, RateTeacherForm, CommentForm
 from flask import render_template, redirect, flash, make_response, jsonify, url_for, request
 from flask_httpauth import HTTPBasicAuth
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Teacher, Rating
+from app.models import User, Teacher, Rating, Comment
 from werkzeug.urls import url_parse
 from datetime import datetime
 from .views import update_score
@@ -99,7 +99,8 @@ def view_teachers():
 @login_required
 def rate_teacher(teacherId):
     user_id = current_user.id
-    rating = Rating.query.filter_by(user_id=user_id, teacher_id=teacherId).first()
+    rating = Rating.query.filter_by(
+        user_id=user_id, teacher_id=teacherId).first()
     if rating is not None:
         flash('You have already rated this teacher!')
         return redirect(url_for('view_teachers'))
@@ -137,11 +138,20 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/teacher/<teacherId>')
+@app.route('/teacher/<teacherId>', methods=['GET', 'POST'])
 @login_required
 def teacher(teacherId):
     teacher = Teacher.query.filter_by(id=teacherId).first()
+
     if teacher is not None:
-        return render_template('teacher.html', teacher=teacher)
+        form = CommentForm()
+        if form.validate_on_submit():
+            comment = Comment(teacher_id=teacherId,
+                              user_id=current_user.id, value=form.comment.data)
+            db.session.add(comment)
+            db.session.commit()
+            flash('Successfully added comment!')
+        return render_template('teacher.html', teacher=teacher, form=form)
     flash('Invalid Teacher ID')
+
     return render_template(url_for('view_teachers'))
