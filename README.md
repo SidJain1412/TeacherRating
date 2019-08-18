@@ -7,3 +7,5 @@
 (I am not a frontend developer :grimacing:)
 
 This should be helpful during faculty selection. Trying to make this as scalable and stable as possible.
+
+Only works for people with emails ending with 'srmuniv.edu.in' (my current university).
