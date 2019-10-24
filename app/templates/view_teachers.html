@@ -26,14 +26,14 @@
 	    <tbody>
 		{% for teacher in teachers %}
 			<tr>
-	            <td style = "background:#95ECBA; color: black;"><a class="btn btn-primary" href="{{ url_for('teacher', teacherId=teacher.id)}}"><b>{{teacher.first_name}} {{teacher.last_name}}</b></a></td>
-	            <td>{{teacher.dept}}</td>
-	            <td class="badge badge-success">{{teacher.overall_score}}</td>
-	            <td>{{teacher.dedication_score}}</td>
-	            <td>{{teacher.leniency_score}}</td>
-	            <td>{{teacher.marks_score}}</td>
-	            <td>{{teacher.teaching_score}}</td>
-	            <td>{{teacher.friendliness_score}}</td>
+	            <td style = "background:#95ECBA; color: black;" align="center"><a class="btn btn-primary" href="{{ url_for('teacher', teacherId=teacher.id)}}"><b>{{teacher.first_name}} {{teacher.last_name}}</b></a></td>
+	            <td align="center">{{teacher.dept}}</td>
+	            <td style="text-align:center" align="center" bgcolor="#3D8751">{{teacher.overall_score|round(2)}}</td>
+	            <td style="text-align:center">{{teacher.dedication_score|round(2)}}</td>
+	            <td style="text-align:center">{{teacher.leniency_score|round(2)}}</td>
+	            <td style="text-align:center">{{teacher.marks_score|round(2)}}</td>
+	            <td style="text-align:center">{{teacher.teaching_score|round(2)}}</td>
+	            <td style="text-align:center">{{teacher.friendliness_score|round(2)}}</td>
 	            <td><a class="btn btn-primary" href="{{ url_for('rate_teacher', teacherId=teacher.id)}}">Rate</a></td>
 	        </tr><br>
 		{% endfor %}
